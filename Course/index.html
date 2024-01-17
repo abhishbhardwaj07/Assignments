@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #cbb8b8;
+    }
+
+    form {
+        color: #ccc;
+        background-color: #431212;
+        padding: 60px;
+        border-radius: 16px;
+        max-width: 500px;
+        margin: 20px auto;
+
+        text-align: center;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    input[type="button"] {
+        background-color: #4c66af;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+    #output{
+        color: #ccc;
+        background-color: #431212;
+        padding: 60px;
+        border-radius: 16px;
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+    <h2>Student Course System</h2>
+
+    <form id="studentForm">
+        <label for="studentId">Enter Student ID:</label><br>
+        <input type="text" id="studentId" name="studentId"><br>
+        <label for="courses">Enter Courses preferred (comma-separated):</label><br>
+        <input type="text" id="courses" name="courses"><br><br>
+        <input type="button" value="Submit" onclick="addCourses()">
+    </form>
+
+    <h2>Fetch Courses</h2>
+
+    <form id="fetchForm">
+        <label for="fetchId">Student ID:</label><br>
+        <input type="text" id="fetchId" name="fetchId"><br><br>
+        <input type="button" value="Fetch Courses" onclick="fetchCourses()">
+    </form>
+
+    <p id="output">Course</p>
+
+    <script>
+        var studentCourses = {};
+
+        function addCourses() {
+            var studentId = document.getElementById("studentId").value;
+            var courses = document.getElementById("courses").value.split(",");
+            studentCourses[studentId] = courses;
+            document.getElementById("studentForm").reset();
+        }
+
+        function fetchCourses() {
+            var fetchId = document.getElementById("fetchId").value;
+            var courses = studentCourses[fetchId];
+            if (courses) {
+                document.getElementById("output").innerText = "Courses: " + courses.join(", ");
+            } else {
+                document.getElementById("output").innerText = "No courses found for this ID.";
+            }
+            document.getElementById("fetchForm").reset();
+        }
+    </script>
+
+</body>
+
+</html>
